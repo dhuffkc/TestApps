@@ -1,8 +1,56 @@
-﻿@{
-    ViewBag.Title = "Home Page";
+﻿@using System.Text
+@using MachineKeySectionWrapper = AntiForgery.MachineKeySectionWrapper
+@{
+	ViewBag.Title = "Home Page";
 }
+@section scripts
+{
+	<script language="javascript" type="text/javascript">
 
+		$(function () {
+			$("#testAjax").click(function () {
+				var data = { versionToken: $('#versionToken').val() };
+
+				$.post(
+					'@this.Url.Action("ReadVersionToken")',
+					data,
+					function (version) {
+						debugger;
+						alert(version.version);
+					}
+				);
+			});
+		})
+	</script>
+}
 <h2>@ViewBag.Message</h2>
 <p>
-    To learn more about ASP.NET MVC visit <a href="http://asp.net/mvc" title="ASP.NET MVC Website">http://asp.net/mvc</a>.
+	To learn more about ASP.NET MVC visit <a href="http://asp.net/mvc" title="ASP.NET MVC Website">
+		http://asp.net/mvc</a>.
 </p>
+<p>
+	Plain Text: @this.ViewBag.PlainText
+</p>
+<p>
+	Cipher Text: @this.ViewBag.CipherText
+</p>
+@using (this.Html.BeginForm("Encrypt", "Home"))
+{
+	@this.Html.TextBox("plainText", this.ViewBag.PlainText as string)
+	<input type="submit" value="Encrypt" />
+}
+@using (this.Html.BeginForm("Decrypt", "Home"))
+{
+	@this.Html.TextBox("cipherText", this.ViewBag.CipherText as string)
+	<input type="submit" value="Decrypt" />
+}
+@using (this.Html.BeginForm("Verify", "Home"))
+{
+	<p>
+		Version: @this.ViewBag.Version</p>
+	@this.Html.Label("versionToken", "Verification Token");
+	@this.Html.TextBox("versionToken", this.ViewBag.CipherText as string)
+	<input type="submit" value="Verify" />
+}
+<button id="testAjax">
+	AJAX</button>
