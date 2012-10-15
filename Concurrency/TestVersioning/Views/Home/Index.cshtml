@@ -1,0 +1,91 @@
+﻿@using TestVersioning.Models
+@model List<TestVersioning.Models.SimplifiedMessageEncrypted>
+@{
+	ViewBag.Title = "Home Page";
+}
+<style>
+	.labelbold
+	{
+		font-weight: bold;
+	}
+	
+	.updateButton
+	{
+	}
+</style>
+<script src="http://localhost:1647/Scripts/jquery-ui-1.8.11.js" type="text/javascript"></script>
+<script src="http://localhost:1647/Scripts/knockout-2.1.0.js" type="text/javascript"></script>
+<script>
+	var viewModel;
+
+	function dateFromJson(json) {
+		return new Date(parseFloat(json.replace(/\/+Date\(([\d+-]+)\)\/+/, '$1')));
+	}
+
+	function getFormattedMessage(message) {
+		var created = dateFromJson(message.Created);
+		var modified = dateFromJson(message.Modified);
+
+		var version = message.Version;
+		var versionAsString = "";
+
+		for (var idx = 0; idx < version.length; idx++) {
+			versionAsString += '[';
+			versionAsString += version[idx];
+			versionAsString += ']';
+		}
+
+		return {
+			Id: message.Id,
+			Number: message.Number,
+			Created: created.toDateString(),
+			Modified: modified.toDateString(),
+			Version: message.Version,
+			VersionAsString: message.EncryptedVersion
+		};
+	}
+
+	var ListModel = function (messages) {
+		var self = this;
+
+		self.messages = ko.observableArray(ko.utils.arrayMap(messages, function (message) {
+			return getFormattedMessage(message);
+		}));
+	};
+
+	function initMessages(messages) {
+		viewModel = new ListModel(messages);
+		ko.applyBindings(viewModel);
+	}
+
+	function updateClick(item, event) {
+		var data = {
+			messageId: item.Id,
+			version: item.VersionAsString
+		};
+
+		$.post("Home/PostMessageModified",
+				data,
+				function (data) {
+					alert('successed: ' + data);
+				});
+	}
+
+	$(function () {
+		// load messages
+		$.getJSON("Home/GetMessages", initMessages);
+	});
+</script>
+<h1>
+	Messages</h1>
+<div id="messages-list" data-bind="foreach: messages">
+	<div>
+		<span class="labelbold">Number: </span><span data-bind="{ text: Number }">></span>
+		<span class="labelbold">Created: </span><span data-bind="{ text: Created }"></span>
+		<span class="labelbold">Modified: </span><span data-bind="{ text: Modified }"></span>
+		<span class="labelbold">Version: </span><span data-bind="{ text: VersionAsString }">
+		</span>
+		<button class="updateButton" data-bind="click: updateClick">
+			Update</button>
+	</div>
+</div>
