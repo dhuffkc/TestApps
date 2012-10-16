@@ -11,21 +11,40 @@ namespace VersioningClient
         {
             var client = new MessageServiceClient();
 
-            var message = client.GetMessage(4);
+            SimplifiedMessage message;
+
+            try
+            {
+                message = client.GetMessage(4);
+            }
+            catch (Exception)
+            {
+                client.Abort();
+                throw;
+            }
 
             message.Number = DateTime.Now.Millisecond.ToString();
+
+            Console.Out.WriteLine("Retrieved current message.  Hit enter to update...");
+            Console.In.ReadLine();
 
             try
             {
                 client.UpdateMessage(message);
+                client.Close();
+
+                Console.Out.WriteLine("Successed!");
             }
-            catch (FaultException<ConcurrencyFaultInformation> exception)
+            catch (FaultException<ConcurrencyFault>)
             {
-                Console.Out.WriteLine("Bad mojo: " + exception.ToString());
+                client.Abort();
+                Console.Out.WriteLine("Update failed due to a concurrency conflict.");
+            }
+            catch (Exception)
+            {
+                client.Abort();
                 throw;
             }
-
-            Console.Out.WriteLine("Successed!");
         }
     }
 }

@@ -20,8 +20,8 @@
   <wsdl:message name="IMessageService_UpdateMessage_OutputMessage">
     <wsdl:part name="parameters" element="tns:UpdateMessageResponse" />
   </wsdl:message>
-  <wsdl:message name="IMessageService_UpdateMessage_ConcurrencyFaultInformationFault_FaultMessage">
-    <wsdl:part xmlns:q1="http://schemas.datacontract.org/2004/07/TestVersioning" name="detail" element="q1:ConcurrencyFaultInformation" />
+  <wsdl:message name="IMessageService_UpdateMessage_ConcurrencyFaultFault_FaultMessage">
+    <wsdl:part xmlns:q1="http://schemas.datacontract.org/2004/07/TestVersioning" name="detail" element="q1:ConcurrencyFault" />
   </wsdl:message>
   <wsdl:portType name="IMessageService">
     <wsdl:operation name="GetMessage">
@@ -31,7 +31,7 @@
     <wsdl:operation name="UpdateMessage">
       <wsdl:input wsaw:Action="http://tempuri.org/IMessageService/UpdateMessage" message="tns:IMessageService_UpdateMessage_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IMessageService/UpdateMessageResponse" message="tns:IMessageService_UpdateMessage_OutputMessage" />
-      <wsdl:fault wsaw:Action="http://tempuri.org/IMessageService/UpdateMessageConcurrencyFaultInformationFault" name="ConcurrencyFaultInformationFault" message="tns:IMessageService_UpdateMessage_ConcurrencyFaultInformationFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IMessageService/UpdateMessageConcurrencyFaultFault" name="ConcurrencyFaultFault" message="tns:IMessageService_UpdateMessage_ConcurrencyFaultFault_FaultMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IMessageService" type="tns:IMessageService">
@@ -53,8 +53,8 @@
       <wsdl:output>
         <soap:body use="literal" />
       </wsdl:output>
-      <wsdl:fault name="ConcurrencyFaultInformationFault">
-        <soap:fault use="literal" name="ConcurrencyFaultInformationFault" namespace="" />
+      <wsdl:fault name="ConcurrencyFaultFault">
+        <soap:fault use="literal" name="ConcurrencyFaultFault" namespace="" />
       </wsdl:fault>
     </wsdl:operation>
   </wsdl:binding>

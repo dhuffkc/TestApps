@@ -21,8 +21,8 @@
             }
             catch (ConcurrencyException)
             {
-                var ex = new FaultException<ConcurrencyFaultInformation>(
-                    new ConcurrencyFaultInformation(), "Concurrency exception.");
+                var ex = new FaultException<ConcurrencyFault>(
+                    new ConcurrencyFault(), "Concurrency exception.");
                 throw ex;
             }
         }

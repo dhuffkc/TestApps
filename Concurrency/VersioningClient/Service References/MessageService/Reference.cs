@@ -124,9 +124,9 @@ namespace VersioningClient.MessageService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="ConcurrencyFaultInformation", Namespace="http://schemas.datacontract.org/2004/07/TestVersioning")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ConcurrencyFault", Namespace="http://schemas.datacontract.org/2004/07/TestVersioning")]
     [System.SerializableAttribute()]
-    public partial class ConcurrencyFaultInformation : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+    public partial class ConcurrencyFault : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
@@ -159,7 +159,7 @@ namespace VersioningClient.MessageService {
         VersioningClient.MessageService.SimplifiedMessage GetMessage(int id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMessageService/UpdateMessage", ReplyAction="http://tempuri.org/IMessageService/UpdateMessageResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(VersioningClient.MessageService.ConcurrencyFaultInformation), Action="http://tempuri.org/IMessageService/UpdateMessageConcurrencyFaultInformationFault", Name="ConcurrencyFaultInformation", Namespace="http://schemas.datacontract.org/2004/07/TestVersioning")]
+        [System.ServiceModel.FaultContractAttribute(typeof(VersioningClient.MessageService.ConcurrencyFault), Action="http://tempuri.org/IMessageService/UpdateMessageConcurrencyFaultFault", Name="ConcurrencyFault", Namespace="http://schemas.datacontract.org/2004/07/TestVersioning")]
         VersioningClient.MessageService.SimplifiedMessage UpdateMessage(VersioningClient.MessageService.SimplifiedMessage message);
     }
     

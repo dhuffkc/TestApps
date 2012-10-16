@@ -66,7 +66,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConcurrencyException.cs" />
-    <Compile Include="ConcurrencyFaultInformation.cs" />
+    <Compile Include="ConcurrencyFault.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MachineKeySectionWrapper.cs" />

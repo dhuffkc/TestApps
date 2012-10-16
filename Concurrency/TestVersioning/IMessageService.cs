@@ -11,7 +11,7 @@
         SimplifiedMessage GetMessage(int id);
 
         [OperationContract]
-        [FaultContract(typeof(ConcurrencyFaultInformation))]
+        //[FaultContract(typeof(ConcurrencyFault))]
         SimplifiedMessage UpdateMessage(SimplifiedMessage message);
     }
 }
