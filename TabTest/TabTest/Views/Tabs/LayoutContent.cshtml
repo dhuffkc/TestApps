@@ -1,0 +1,77 @@
+﻿@{
+	Layout = null;
+}
+<script type="text/javascript">
+
+	$(function () {
+		$("#contentLayout")
+			.layout()
+			.resize(function (event) {
+				debugger;
+				event.target.tabs("resizeAll");
+			});
+	});
+	
+</script>
+<div id="contentLayout" style="background-color: orange; padding: 0px;">
+	<div class="ui-layout-north">
+		Layout Content North
+	</div>
+	<div class="ui-layout-west">
+		Layout Content West
+	</div>
+	<div class="ui-layout-center">
+		Layout Content Center
+		<div>
+			Content generated on @DateTime.Now.ToLongTimeString().
+		</div>
+		<div>
+			Content generated on @DateTime.Now.ToLongTimeString().
+		</div>
+		<div>
+			Content generated on @DateTime.Now.ToLongTimeString().
+		</div>
+		<div>
+			Content generated on @DateTime.Now.ToLongTimeString().
+		</div>
+		<div>
+			Content generated on @DateTime.Now.ToLongTimeString().
+		</div>
+		<div>
+			Content generated on @DateTime.Now.ToLongTimeString().
+		</div>
+		<div>
+			Content generated on @DateTime.Now.ToLongTimeString().
+		</div>
+		<div>
+			Content generated on @DateTime.Now.ToLongTimeString().
+		</div>
+		<div>
+			Content generated on @DateTime.Now.ToLongTimeString().
+		</div>
+		<div>
+			Content generated on @DateTime.Now.ToLongTimeString().
+		</div>
+		<div>
+			Content generated on @DateTime.Now.ToLongTimeString().
+		</div>
+		<div>
+			Content generated on @DateTime.Now.ToLongTimeString().
+		</div>
+		<div>
+			Content generated on @DateTime.Now.ToLongTimeString().
+		</div>
+		<div>
+			Content generated on @DateTime.Now.ToLongTimeString().
+		</div>
+		<div>
+			Content generated on @DateTime.Now.ToLongTimeString().
+		</div>
+	</div>
+	<div class="ui-layout-east">
+		Layout Content East
+	</div>
+	<div class="ui-layout-south">
+		Layout Content South
+	</div>
+</div>
