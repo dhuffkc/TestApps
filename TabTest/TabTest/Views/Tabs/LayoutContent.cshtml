@@ -4,16 +4,11 @@
 <script type="text/javascript">
 
 	$(function () {
-		$("#contentLayout")
-			.layout()
-			.resize(function (event) {
-				debugger;
-				event.target.tabs("resizeAll");
-			});
+		$("#contentLayout").layout();
 	});
 	
 </script>
-<div id="contentLayout" style="background-color: orange; padding: 0px;">
+<div id="contentLayout" style="background-color: orange; overflow: hidden; padding: 0;">
 	<div class="ui-layout-north">
 		Layout Content North
 	</div>
