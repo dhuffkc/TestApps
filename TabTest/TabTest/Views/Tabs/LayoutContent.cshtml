@@ -1,14 +1,23 @@
 ﻿@{
 	Layout = null;
+	Guid uid = Guid.NewGuid();
 }
 <script type="text/javascript">
 
 	$(function () {
-		$("#contentLayout").layout();
+		// debugger;
+		
+		$("#contentLayout-@uid").layout();
+
+		$.get("@Url.Action("TabContent")",
+			function (data) {
+				// debugger;
+				$("#contentLayout-@uid > .ui-layout-center").html(data);
+			});
 	});
 	
 </script>
-<div id="contentLayout" style="background-color: orange; overflow: hidden; padding: 0;">
+<div id="contentLayout-@uid" style="background-color: lightgreen; height: 100%; overflow: hidden; padding: 0 10px;">
 	<div class="ui-layout-north">
 		Layout Content North
 	</div>
@@ -16,52 +25,6 @@
 		Layout Content West
 	</div>
 	<div class="ui-layout-center">
-		Layout Content Center
-		<div>
-			Content generated on @DateTime.Now.ToLongTimeString().
-		</div>
-		<div>
-			Content generated on @DateTime.Now.ToLongTimeString().
-		</div>
-		<div>
-			Content generated on @DateTime.Now.ToLongTimeString().
-		</div>
-		<div>
-			Content generated on @DateTime.Now.ToLongTimeString().
-		</div>
-		<div>
-			Content generated on @DateTime.Now.ToLongTimeString().
-		</div>
-		<div>
-			Content generated on @DateTime.Now.ToLongTimeString().
-		</div>
-		<div>
-			Content generated on @DateTime.Now.ToLongTimeString().
-		</div>
-		<div>
-			Content generated on @DateTime.Now.ToLongTimeString().
-		</div>
-		<div>
-			Content generated on @DateTime.Now.ToLongTimeString().
-		</div>
-		<div>
-			Content generated on @DateTime.Now.ToLongTimeString().
-		</div>
-		<div>
-			Content generated on @DateTime.Now.ToLongTimeString().
-		</div>
-		<div>
-			Content generated on @DateTime.Now.ToLongTimeString().
-		</div>
-		<div>
-			Content generated on @DateTime.Now.ToLongTimeString().
-		</div>
-		<div>
-			Content generated on @DateTime.Now.ToLongTimeString().
-		</div>
-		<div>
-			Content generated on @DateTime.Now.ToLongTimeString().
-		</div>
 	</div>
 	<div class="ui-layout-east">
 		Layout Content East

@@ -3,58 +3,40 @@
 	<script type="text/javascript">
 
 		$(function () {
-
-			$("#tab-layout").tabs({
-				show: function (event, ui) {
-					return;
-					debugger;
-					// $.layout.callbacks.resizeTabLayout(event, ui);
-					var poh = $(ui.tab).parent().outerHeight();
-
-					var $c = $(ui.panel),
-						h = parseInt($(ui.tab).parent().outerHeight());
-
-					while ($c.length > 0 && !$c.hasClass("ui-layout-pane")) {
-						h += ($c.outerHeight(true) - $c.innerHeight());
-						$c = $c.parent();
-					}
-
-					h = parseInt($c.innerHeight() - h);
-					$(ui.panel).height(h);
-					return true;
-				}
-			});
-
-			$("#tab-layout").layout({
-				north__paneSelector: "#tab-buttons",
-				center__paneSelector: "#tab-panels",
-				resizable: false,
-				slidable: false,
-				closable: false,
-				north__spacing_open: 0
-			});
+			$("#tab-layout")
+				.tabs()
+				.layout({
+					north__paneSelector: "UL",
+					center__paneSelector: "DIV",
+					resizable: false,
+					slidable: false,
+					closable: false,
+					north__spacing_open: 0
+				});
 		});
 
 	</script>
 	<style type="text/css">
 		
-		#tab-panels > .ui-tabs-panel {
-			background-color: plum;
+		/* for tab panels */
+		#tab-layout > .ui-layout-pane-center > .ui-tabs-panel {
+			background-color: orange;
 			height: 100%;
 			overflow: hidden;
 			padding: 0 10px;
 		}
+
 	</style>
 }
 <div id="tab-layout" style="background-color: lightgrey; border: 0; height: 100%; overflow: hidden; padding: 0 10px;">
-	<ul id="tab-buttons">
+	<ul>
 		<li><a href="#tab1">One</a></li>
+		<li><a href="@Url.Action("LayoutContent")">Layout</a></li>
 		<li><a href="@Url.Action("DateContent")">Dates 1</a></li>
 		<li><a href="@Url.Action("DateContent")">Dates 2</a></li>
-		<li><a href="@Url.Action("DateContent")">Dates 3</a></li>
 	</ul>
-	<div id="tab-panels" style="background-color: pink; overflow: hidden; padding: 0 10px;">
-		<div id="tab1" style="background-color: orange; height: 100%; overflow: auto; padding: 0 10px;">
+	<div style="background-color: pink; overflow: hidden; padding: 0 10px;">
+		<div id="tab1">
 			Tab One content.
 		</div>
 	</div>

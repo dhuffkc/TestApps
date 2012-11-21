@@ -18,5 +18,10 @@
 		{
 			return View();
 		}
+
+		public ActionResult TabContent()
+		{
+			return View();
+		}
    }
 }

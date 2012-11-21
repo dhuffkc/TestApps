@@ -1,0 +1,42 @@
+﻿@{
+	Layout = null;
+	Guid uid = Guid.NewGuid();
+}
+<script type="text/javascript">
+
+	$(function () {
+		$("#tab-content-layout-@uid")
+				.tabs()
+				.layout({
+					north__paneSelector: "UL",
+					center__paneSelector: "DIV",
+					resizable: false,
+					slidable: false,
+					closable: false,
+					north__spacing_open: 0
+				});
+	});
+
+</script>
+<style type="text/css">
+	/* for tab panels */
+	#tab-content-layout-@uid > .ui-layout-pane-center > .ui-tabs-panel
+	{
+		background-color: orange;
+		height: 100%;
+		overflow: hidden;
+		padding: 0 10px;
+	}
+</style>
+<div id="tab-content-layout-@uid" style="background-color: lightgrey; border: 0; height: 100%; overflow: hidden; padding: 0 10px;">
+	<ul>
+		<li><a href="#tab-content-tab1">One</a></li>
+		<li><a href="@Url.Action("LayoutContent")">Layout</a></li>
+		<li><a href="@Url.Action("DateContent")">Dates</a></li>
+	</ul>
+	<div>
+		<div id="tab-content-tab1">
+			Tab One content.
+		</div>
+	</div>
+</div>
