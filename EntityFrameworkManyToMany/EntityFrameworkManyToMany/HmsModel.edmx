@@ -1,0 +1,546 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="HmsModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="HmsModelStoreContainer">
+          <EntitySet Name="Hms_User" EntityType="HmsModel.Store.Hms_User" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Hms_User_Tab" EntityType="HmsModel.Store.Hms_User_Tab" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Hms_User_Tab_Message_Types" EntityType="HmsModel.Store.Hms_User_Tab_Message_Types" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Hms_User_Tab_Pharmacy" EntityType="HmsModel.Store.Hms_User_Tab_Pharmacy" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Hms_User_Tab_Priority" EntityType="HmsModel.Store.Hms_User_Tab_Priority" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Message_Type" EntityType="HmsModel.Store.Message_Type" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Pharmacy" EntityType="HmsModel.Store.Pharmacy" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Priority" EntityType="HmsModel.Store.Priority" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_Hms_User_Default_message_type" Association="HmsModel.Store.FK_Hms_User_Default_message_type">
+            <End Role="Message_Type" EntitySet="Message_Type" />
+            <End Role="Hms_User" EntitySet="Hms_User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Hms_User_Tab_Hms_user" Association="HmsModel.Store.FK_Hms_User_Tab_Hms_user">
+            <End Role="Hms_User" EntitySet="Hms_User" />
+            <End Role="Hms_User_Tab" EntitySet="Hms_User_Tab" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Hms_User_Tab_Message_Types_Hms_user_tab" Association="HmsModel.Store.FK_Hms_User_Tab_Message_Types_Hms_user_tab">
+            <End Role="Hms_User_Tab" EntitySet="Hms_User_Tab" />
+            <End Role="Hms_User_Tab_Message_Types" EntitySet="Hms_User_Tab_Message_Types" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Hms_User_Tab_Pharmacy_Hms_user_tab" Association="HmsModel.Store.FK_Hms_User_Tab_Pharmacy_Hms_user_tab">
+            <End Role="Hms_User_Tab" EntitySet="Hms_User_Tab" />
+            <End Role="Hms_User_Tab_Pharmacy" EntitySet="Hms_User_Tab_Pharmacy" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Hms_User_Tab_Pharmacy_Pharmacy" Association="HmsModel.Store.FK_Hms_User_Tab_Pharmacy_Pharmacy">
+            <End Role="Pharmacy" EntitySet="Pharmacy" />
+            <End Role="Hms_User_Tab_Pharmacy" EntitySet="Hms_User_Tab_Pharmacy" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Hms_User_Tab_Priority_Hms_user_tab" Association="HmsModel.Store.FK_Hms_User_Tab_Priority_Hms_user_tab">
+            <End Role="Hms_User_Tab" EntitySet="Hms_User_Tab" />
+            <End Role="Hms_User_Tab_Priority" EntitySet="Hms_User_Tab_Priority" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_tab_message_type" Association="HmsModel.Store.FK_User_tab_message_type">
+            <End Role="Message_Type" EntitySet="Message_Type" />
+            <End Role="Hms_User_Tab_Message_Types" EntitySet="Hms_User_Tab_Message_Types" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Tab_Priority" Association="HmsModel.Store.FK_User_Tab_Priority">
+            <End Role="Priority" EntitySet="Priority" />
+            <End Role="Hms_User_Tab_Priority" EntitySet="Hms_User_Tab_Priority" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Hms_User">
+          <Key>
+            <PropertyRef Name="Hms_user_ID" />
+          </Key>
+          <Property Name="Hms_user_ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="First_name" Type="varchar" MaxLength="30" />
+          <Property Name="Last_name" Type="varchar" MaxLength="50" />
+          <Property Name="Initials" Type="varchar" MaxLength="3" />
+          <Property Name="User_name" Type="varchar" Nullable="false" MaxLength="20" />
+          <Property Name="Host_operator_id" Type="varchar" MaxLength="20" />
+          <Property Name="Default_message_type" Type="tinyint" Nullable="false" />
+          <Property Name="Locked" Type="bit" Nullable="false" />
+          <Property Name="Invalid_time" Type="datetime2" />
+          <Property Name="New_message_preference" Type="bit" Nullable="false" />
+          <Property Name="Version" Type="timestamp" StoreGeneratedPattern="Computed" />
+          <Property Name="Security_authorization" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Hms_User_Tab">
+          <Key>
+            <PropertyRef Name="Hms_user_tab_ID" />
+          </Key>
+          <Property Name="Hms_user_tab_ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Hms_user_id" Type="int" Nullable="false" />
+          <Property Name="Tab_name" Type="varchar" MaxLength="60" />
+          <Property Name="Ordinal" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Hms_User_Tab_Message_Types">
+          <Key>
+            <PropertyRef Name="Hms_user_tab_id" />
+            <PropertyRef Name="Message_type" />
+          </Key>
+          <Property Name="Hms_user_tab_id" Type="int" Nullable="false" />
+          <Property Name="Message_type" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Hms_User_Tab_Pharmacy">
+          <Key>
+            <PropertyRef Name="Hms_user_tab_id" />
+            <PropertyRef Name="Pharmacy_id" />
+          </Key>
+          <Property Name="Hms_user_tab_id" Type="int" Nullable="false" />
+          <Property Name="Pharmacy_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Hms_User_Tab_Priority">
+          <Key>
+            <PropertyRef Name="Hms_user_tab_id" />
+            <PropertyRef Name="Priority" />
+          </Key>
+          <Property Name="Hms_user_tab_id" Type="int" Nullable="false" />
+          <Property Name="Priority" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Message_Type">
+          <Key>
+            <PropertyRef Name="Ordinal" />
+          </Key>
+          <Property Name="Ordinal" Type="tinyint" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Description" Type="nvarchar" MaxLength="256" />
+        </EntityType>
+        <EntityType Name="Pharmacy">
+          <Key>
+            <PropertyRef Name="Pharmacy_ID" />
+          </Key>
+          <Property Name="Pharmacy_ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Code" Type="varchar" Nullable="false" MaxLength="6" />
+          <Property Name="Street1" Type="nvarchar" MaxLength="100" />
+          <Property Name="Street2" Type="nvarchar" MaxLength="100" />
+          <Property Name="City" Type="nvarchar" MaxLength="32" />
+          <Property Name="State" Type="nvarchar" MaxLength="20" />
+          <Property Name="Zip" Type="varchar" MaxLength="10" />
+          <Property Name="Country" Type="varchar" MaxLength="40" />
+          <Property Name="Phone" Type="varchar" MaxLength="20" />
+          <Property Name="Timezone" Type="varchar" MaxLength="50" />
+          <Property Name="Last_polled" Type="datetime" />
+          <Property Name="Configuration" Type="xml" />
+          <Property Name="Version" Type="timestamp" StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <EntityType Name="Priority">
+          <Key>
+            <PropertyRef Name="Ordinal" />
+          </Key>
+          <Property Name="Ordinal" Type="tinyint" Nullable="false" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Description" Type="varchar" MaxLength="50" />
+          <Property Name="Is_Default" Type="bit" Nullable="false" />
+          <Property Name="Due" Type="tinyint" Nullable="false" />
+          <Property Name="Due_within" Type="smallint" Nullable="false" />
+          <Property Name="Due_within_time_period" Type="tinyint" Nullable="false" />
+          <Property Name="Due_text_color" Type="char" MaxLength="6" />
+          <Property Name="Alert_within" Type="smallint" Nullable="false" />
+          <Property Name="Alert_within_time_period" Type="tinyint" Nullable="false" />
+          <Property Name="Alert_text_color" Type="char" MaxLength="6" />
+          <Property Name="Version" Type="timestamp" StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <Association Name="FK_Hms_User_Default_message_type">
+          <End Role="Message_Type" Type="HmsModel.Store.Message_Type" Multiplicity="1" />
+          <End Role="Hms_User" Type="HmsModel.Store.Hms_User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Message_Type">
+              <PropertyRef Name="Ordinal" />
+            </Principal>
+            <Dependent Role="Hms_User">
+              <PropertyRef Name="Default_message_type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Hms_User_Tab_Hms_user">
+          <End Role="Hms_User" Type="HmsModel.Store.Hms_User" Multiplicity="1" />
+          <End Role="Hms_User_Tab" Type="HmsModel.Store.Hms_User_Tab" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hms_User">
+              <PropertyRef Name="Hms_user_ID" />
+            </Principal>
+            <Dependent Role="Hms_User_Tab">
+              <PropertyRef Name="Hms_user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Hms_User_Tab_Message_Types_Hms_user_tab">
+          <End Role="Hms_User_Tab" Type="HmsModel.Store.Hms_User_Tab" Multiplicity="1" />
+          <End Role="Hms_User_Tab_Message_Types" Type="HmsModel.Store.Hms_User_Tab_Message_Types" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hms_User_Tab">
+              <PropertyRef Name="Hms_user_tab_ID" />
+            </Principal>
+            <Dependent Role="Hms_User_Tab_Message_Types">
+              <PropertyRef Name="Hms_user_tab_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Hms_User_Tab_Pharmacy_Hms_user_tab">
+          <End Role="Hms_User_Tab" Type="HmsModel.Store.Hms_User_Tab" Multiplicity="1" />
+          <End Role="Hms_User_Tab_Pharmacy" Type="HmsModel.Store.Hms_User_Tab_Pharmacy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hms_User_Tab">
+              <PropertyRef Name="Hms_user_tab_ID" />
+            </Principal>
+            <Dependent Role="Hms_User_Tab_Pharmacy">
+              <PropertyRef Name="Hms_user_tab_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Hms_User_Tab_Pharmacy_Pharmacy">
+          <End Role="Pharmacy" Type="HmsModel.Store.Pharmacy" Multiplicity="1" />
+          <End Role="Hms_User_Tab_Pharmacy" Type="HmsModel.Store.Hms_User_Tab_Pharmacy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pharmacy">
+              <PropertyRef Name="Pharmacy_ID" />
+            </Principal>
+            <Dependent Role="Hms_User_Tab_Pharmacy">
+              <PropertyRef Name="Pharmacy_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Hms_User_Tab_Priority_Hms_user_tab">
+          <End Role="Hms_User_Tab" Type="HmsModel.Store.Hms_User_Tab" Multiplicity="1" />
+          <End Role="Hms_User_Tab_Priority" Type="HmsModel.Store.Hms_User_Tab_Priority" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hms_User_Tab">
+              <PropertyRef Name="Hms_user_tab_ID" />
+            </Principal>
+            <Dependent Role="Hms_User_Tab_Priority">
+              <PropertyRef Name="Hms_user_tab_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_tab_message_type">
+          <End Role="Message_Type" Type="HmsModel.Store.Message_Type" Multiplicity="1" />
+          <End Role="Hms_User_Tab_Message_Types" Type="HmsModel.Store.Hms_User_Tab_Message_Types" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Message_Type">
+              <PropertyRef Name="Ordinal" />
+            </Principal>
+            <Dependent Role="Hms_User_Tab_Message_Types">
+              <PropertyRef Name="Message_type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Tab_Priority">
+          <End Role="Priority" Type="HmsModel.Store.Priority" Multiplicity="1" />
+          <End Role="Hms_User_Tab_Priority" Type="HmsModel.Store.Hms_User_Tab_Priority" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Priority">
+              <PropertyRef Name="Ordinal" />
+            </Principal>
+            <Dependent Role="Hms_User_Tab_Priority">
+              <PropertyRef Name="Priority" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="HmsModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="HmsEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Hms_User" EntityType="HmsModel.Hms_User" />
+          <EntitySet Name="Tabs" EntityType="HmsModel.Tab" />
+          <EntitySet Name="MessageTypes" EntityType="HmsModel.MessageType" />
+          <AssociationSet Name="FK_Hms_User_Default_message_type" Association="HmsModel.FK_Hms_User_Default_message_type">
+            <End Role="Message_Type" EntitySet="MessageTypes" />
+            <End Role="Hms_User" EntitySet="Hms_User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Hms_User_Tab_Hms_user" Association="HmsModel.FK_Hms_User_Tab_Hms_user">
+            <End Role="Hms_User" EntitySet="Hms_User" />
+            <End Role="Hms_User_Tab" EntitySet="Tabs" />
+          </AssociationSet>
+          <AssociationSet Name="Hms_User_Tab_Message_Types" Association="HmsModel.Hms_User_Tab_Message_Types">
+            <End Role="Hms_User_Tab" EntitySet="Tabs" />
+            <End Role="Message_Type" EntitySet="MessageTypes" />
+          </AssociationSet>
+          <EntitySet Name="Pharmacies" EntityType="HmsModel.Pharmacy" />
+          <EntitySet Name="Priorities" EntityType="HmsModel.Priority" />
+          <AssociationSet Name="Hms_User_Tab_Pharmacy" Association="HmsModel.Hms_User_Tab_Pharmacy">
+            <End Role="Hms_User_Tab" EntitySet="Tabs" />
+            <End Role="Pharmacy" EntitySet="Pharmacies" />
+          </AssociationSet>
+          <AssociationSet Name="Hms_User_Tab_Priority" Association="HmsModel.Hms_User_Tab_Priority">
+            <End Role="Hms_User_Tab" EntitySet="Tabs" />
+            <End Role="Priority" EntitySet="Priorities" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Hms_User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="First_name" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Last_name" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Initials" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="User_name" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Host_operator_id" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="Byte" Name="Default_message_type" Nullable="false" />
+          <Property Type="Boolean" Name="Locked" Nullable="false" />
+          <Property Type="DateTime" Name="Invalid_time" />
+          <Property Type="Boolean" Name="New_message_preference" Nullable="false" />
+          <Property Type="Binary" Name="Version" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+          <Property Type="Int32" Name="Security_authorization" Nullable="false" />
+          <NavigationProperty Name="Message_Type" Relationship="HmsModel.FK_Hms_User_Default_message_type" FromRole="Hms_User" ToRole="Message_Type" />
+          <NavigationProperty Name="Hms_User_Tab" Relationship="HmsModel.FK_Hms_User_Tab_Hms_user" FromRole="Hms_User" ToRole="Hms_User_Tab" />
+        </EntityType>
+        <EntityType Name="Tab">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+          <Property Type="String" Name="Name" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Type="Byte" Name="Ordinal" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="HmsModel.FK_Hms_User_Tab_Hms_user" FromRole="Hms_User_Tab" ToRole="Hms_User" />
+          <NavigationProperty Name="MessageTypes" Relationship="HmsModel.Hms_User_Tab_Message_Types" FromRole="Hms_User_Tab" ToRole="Message_Type" />
+          <NavigationProperty Name="Pharmacies" Relationship="HmsModel.Hms_User_Tab_Pharmacy" FromRole="Hms_User_Tab" ToRole="Pharmacy" />
+          <NavigationProperty Name="Priorities" Relationship="HmsModel.Hms_User_Tab_Priority" FromRole="Hms_User_Tab" ToRole="Priority" />
+        </EntityType>
+        <EntityType Name="MessageType">
+          <Key>
+            <PropertyRef Name="Ordinal" />
+          </Key>
+          <Property Type="Byte" Name="Ordinal" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Description" MaxLength="256" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK_Hms_User_Default_message_type">
+          <End Type="HmsModel.MessageType" Role="Message_Type" Multiplicity="1" />
+          <End Type="HmsModel.Hms_User" Role="Hms_User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Message_Type">
+              <PropertyRef Name="Ordinal" />
+            </Principal>
+            <Dependent Role="Hms_User">
+              <PropertyRef Name="Default_message_type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Hms_User_Tab_Hms_user">
+          <End Type="HmsModel.Hms_User" Role="Hms_User" Multiplicity="1" />
+          <End Type="HmsModel.Tab" Role="Hms_User_Tab" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hms_User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Hms_User_Tab">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Hms_User_Tab_Message_Types">
+          <End Type="HmsModel.Tab" Role="Hms_User_Tab" Multiplicity="*" />
+          <End Type="HmsModel.MessageType" Role="Message_Type" Multiplicity="*" />
+        </Association>
+        <EntityType Name="Pharmacy">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Code" Nullable="false" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Street1" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Street2" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="City" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="State" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Zip" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Country" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Phone" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Timezone" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="Last_polled" />
+          <Property Type="String" Name="Configuration" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Binary" Name="Version" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <EntityType Name="Priority">
+          <Key>
+            <PropertyRef Name="Ordinal" />
+          </Key>
+          <Property Type="Byte" Name="Ordinal" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Description" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Boolean" Name="Is_Default" Nullable="false" />
+          <Property Type="Byte" Name="Due" Nullable="false" />
+          <Property Type="Int16" Name="Due_within" Nullable="false" />
+          <Property Type="Byte" Name="Due_within_time_period" Nullable="false" />
+          <Property Type="String" Name="Due_text_color" MaxLength="6" FixedLength="true" Unicode="false" />
+          <Property Type="Int16" Name="Alert_within" Nullable="false" />
+          <Property Type="Byte" Name="Alert_within_time_period" Nullable="false" />
+          <Property Type="String" Name="Alert_text_color" MaxLength="6" FixedLength="true" Unicode="false" />
+          <Property Type="Binary" Name="Version" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <Association Name="Hms_User_Tab_Pharmacy">
+          <End Type="HmsModel.Tab" Role="Hms_User_Tab" Multiplicity="*" />
+          <End Type="HmsModel.Pharmacy" Role="Pharmacy" Multiplicity="*" />
+        </Association>
+        <Association Name="Hms_User_Tab_Priority">
+          <End Type="HmsModel.Tab" Role="Hms_User_Tab" Multiplicity="*" />
+          <End Type="HmsModel.Priority" Role="Priority" Multiplicity="*" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="HmsModelStoreContainer" CdmEntityContainer="HmsEntities">
+          <EntitySetMapping Name="Hms_User">
+            <EntityTypeMapping TypeName="HmsModel.Hms_User">
+              <MappingFragment StoreEntitySet="Hms_User">
+                <ScalarProperty Name="Security_authorization" ColumnName="Security_authorization" />
+                <ScalarProperty Name="Version" ColumnName="Version" />
+                <ScalarProperty Name="New_message_preference" ColumnName="New_message_preference" />
+                <ScalarProperty Name="Invalid_time" ColumnName="Invalid_time" />
+                <ScalarProperty Name="Locked" ColumnName="Locked" />
+                <ScalarProperty Name="Default_message_type" ColumnName="Default_message_type" />
+                <ScalarProperty Name="Host_operator_id" ColumnName="Host_operator_id" />
+                <ScalarProperty Name="User_name" ColumnName="User_name" />
+                <ScalarProperty Name="Initials" ColumnName="Initials" />
+                <ScalarProperty Name="Last_name" ColumnName="Last_name" />
+                <ScalarProperty Name="First_name" ColumnName="First_name" />
+                <ScalarProperty Name="Id" ColumnName="Hms_user_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tabs">
+            <EntityTypeMapping TypeName="HmsModel.Tab">
+              <MappingFragment StoreEntitySet="Hms_User_Tab">
+                <ScalarProperty Name="Ordinal" ColumnName="Ordinal" />
+                <ScalarProperty Name="Name" ColumnName="Tab_name" />
+                <ScalarProperty Name="UserId" ColumnName="Hms_user_id" />
+                <ScalarProperty Name="Id" ColumnName="Hms_user_tab_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MessageTypes">
+            <EntityTypeMapping TypeName="HmsModel.MessageType">
+              <MappingFragment StoreEntitySet="Message_Type">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Ordinal" ColumnName="Ordinal" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="Hms_User_Tab_Message_Types" TypeName="HmsModel.Hms_User_Tab_Message_Types" StoreEntitySet="Hms_User_Tab_Message_Types">
+            <EndProperty Name="Message_Type">
+              <ScalarProperty Name="Ordinal" ColumnName="Message_type" />
+            </EndProperty>
+            <EndProperty Name="Hms_User_Tab">
+              <ScalarProperty Name="Id" ColumnName="Hms_user_tab_id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="Pharmacies">
+            <EntityTypeMapping TypeName="HmsModel.Pharmacy">
+              <MappingFragment StoreEntitySet="Pharmacy">
+                <ScalarProperty Name="Version" ColumnName="Version" />
+                <ScalarProperty Name="Configuration" ColumnName="Configuration" />
+                <ScalarProperty Name="Last_polled" ColumnName="Last_polled" />
+                <ScalarProperty Name="Timezone" ColumnName="Timezone" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="Zip" ColumnName="Zip" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Street2" ColumnName="Street2" />
+                <ScalarProperty Name="Street1" ColumnName="Street1" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Pharmacy_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Priorities">
+            <EntityTypeMapping TypeName="HmsModel.Priority">
+              <MappingFragment StoreEntitySet="Priority">
+                <ScalarProperty Name="Version" ColumnName="Version" />
+                <ScalarProperty Name="Alert_text_color" ColumnName="Alert_text_color" />
+                <ScalarProperty Name="Alert_within_time_period" ColumnName="Alert_within_time_period" />
+                <ScalarProperty Name="Alert_within" ColumnName="Alert_within" />
+                <ScalarProperty Name="Due_text_color" ColumnName="Due_text_color" />
+                <ScalarProperty Name="Due_within_time_period" ColumnName="Due_within_time_period" />
+                <ScalarProperty Name="Due_within" ColumnName="Due_within" />
+                <ScalarProperty Name="Due" ColumnName="Due" />
+                <ScalarProperty Name="Is_Default" ColumnName="Is_Default" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Ordinal" ColumnName="Ordinal" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="Hms_User_Tab_Pharmacy" TypeName="HmsModel.Hms_User_Tab_Pharmacy" StoreEntitySet="Hms_User_Tab_Pharmacy">
+            <EndProperty Name="Pharmacy">
+              <ScalarProperty Name="Id" ColumnName="Pharmacy_id" />
+            </EndProperty>
+            <EndProperty Name="Hms_User_Tab">
+              <ScalarProperty Name="Id" ColumnName="Hms_user_tab_id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="Hms_User_Tab_Priority" TypeName="HmsModel.Hms_User_Tab_Priority" StoreEntitySet="Hms_User_Tab_Priority">
+            <EndProperty Name="Priority">
+              <ScalarProperty Name="Ordinal" ColumnName="Priority" />
+            </EndProperty>
+            <EndProperty Name="Hms_User_Tab">
+              <ScalarProperty Name="Id" ColumnName="Hms_user_tab_id" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="HmsModel">
+        <EntityTypeShape EntityType="HmsModel.Hms_User" Width="1.5" PointX="0.75" PointY="1" Height="3.2357796223958339" />
+        <EntityTypeShape EntityType="HmsModel.Tab" Width="1.5" PointX="3" PointY="1.625" Height="1.9210009765624996" />
+        <EntityTypeShape EntityType="HmsModel.MessageType" Width="1.5" PointX="5.25" PointY="1.75" Height="1.427958984375" />
+        <AssociationConnector Association="HmsModel.FK_Hms_User_Default_message_type" >
+          <ConnectorPoint PointX="6" PointY="3.177958984375" />
+          <ConnectorPoint PointX="6" PointY="4.0864876302083335" />
+          <ConnectorPoint PointX="4.1380227083333327" PointY="4.0864876302083326" />
+          <ConnectorPoint PointX="3.9713560416666662" PointY="4.0864876302083335" />
+          <ConnectorPoint PointX="3.6302070833333335" PointY="4.0864876302083326" />
+          <ConnectorPoint PointX="3.4635404166666666" PointY="4.0864876302083335" />
+          <ConnectorPoint PointX="2.25" PointY="4.0864876302083335" />
+        </AssociationConnector>
+        <AssociationConnector Association="HmsModel.FK_Hms_User_Tab_Hms_user" >
+          <ConnectorPoint PointX="2.25" PointY="2.7498478190104167" />
+          <ConnectorPoint PointX="3" PointY="2.7498478190104167" />
+        </AssociationConnector>
+        <AssociationConnector Association="HmsModel.Hms_User_Tab_Message_Types" >
+          <ConnectorPoint PointX="4.5" PointY="2.4639794921875" />
+          <ConnectorPoint PointX="5.25" PointY="2.4639794921875" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="HmsModel.Pharmacy" Width="1.5" PointX="5.25" PointY="5.25" Height="3.2357796223958335" />
+        <EntityTypeShape EntityType="HmsModel.Priority" Width="1.5" PointX="5.25" PointY="9.375" Height="2.9070849609374996" />
+        <AssociationConnector Association="HmsModel.Hms_User_Tab_Pharmacy" >
+          <ConnectorPoint PointX="3.54687375" PointY="3.8746956380208339" />
+          <ConnectorPoint PointX="3.54687375" PointY="6.8678898111979167" />
+          <ConnectorPoint PointX="3.9713560416666662" PointY="6.8678898111979159" />
+          <ConnectorPoint PointX="4.1380227083333327" PointY="6.8678898111979167" />
+          <ConnectorPoint PointX="5.25" PointY="6.8678898111979167" />
+        </AssociationConnector>
+        <AssociationConnector Association="HmsModel.Hms_User_Tab_Priority" >
+          <ConnectorPoint PointX="4.054689375" PointY="3.8746956380208339" />
+          <ConnectorPoint PointX="4.054689375" PointY="10.82854248046875" />
+          <ConnectorPoint PointX="5.25" PointY="10.82854248046875" />
+        </AssociationConnector>
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>
