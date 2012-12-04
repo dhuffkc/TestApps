@@ -1,0 +1,33 @@
+﻿@{
+	ViewBag.Title = "Home Page";
+}
+
+<script type="text/javascript">
+	
+	function postIt() {
+		// var data = { test: [ { Data: "1" }, { Data: "2" } ] };
+		// var data = { test: [ "1", "2" ] };
+		var data = [ "1", "2" ];
+		var stringifiedData = JSON.stringify(data);
+
+		debugger;
+		$.ajax("@Url.Action("PostTest")", {
+			data: stringifiedData,
+			contentType: 'application/json',
+			type: 'POST',
+			dataType: "json",
+			success: function() {
+				debugger;
+			}
+		})
+		.fail(function () {
+			debugger;
+		});
+	}
+
+</script>
+<h2>@ViewBag.Message</h2>
+<p>
+	To learn more about ASP.NET MVC visit <a href="http://asp.net/mvc" title="ASP.NET MVC Website">http://asp.net/mvc</a>.
+</p>
+<button onclick="postIt();">Post It</button>
