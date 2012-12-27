@@ -8,6 +8,9 @@ namespace MvcPoc.Controllers
 {
 	public class HomeController : Controller
 	{
+		public const string Controller = "Home";
+		public const string JeffTimeAction = "JeffTime";
+
 		public ActionResult Index()
 		{
 			ViewBag.Message = "Welcome to ASP.NET MVC!";
