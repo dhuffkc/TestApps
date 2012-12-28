@@ -1,35 +1,34 @@
 ﻿<!DOCTYPE HTML>
 <html>
 <head>
-	<meta charset="utf-8">
+	<meta charset="utf-8" />
 	<title>jQuery File Upload Example</title>
-</head>
-<body>
-	<input id="fileupload" type="file" name="files[]">
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.js"></script>
-	<script src="js/vendor/jquery.ui.widget.js"></script>
-	<script src="js/jquery.iframe-transport.js"></script>
-	<script src="js/jquery.fileupload.js"></script>
-	<script>
+	<script src="js/vendor/jquery.js" type="text/javascript"></script>
+	<script src="js/vendor/jquery.ui.widget.js" type="text/javascript"></script>
+	<script src="js/jquery.iframe-transport.js" type="text/javascript"></script>
+	<script src="js/jquery.fileupload.js" type="text/javascript"></script>
+	<script type="text/javascript">
 		$(function () {
 			$('#fileupload').fileupload({
 				dataType: 'json',
+				// forceIframeTransport: true,
 				url: 'upload.ashx',
 				add: function (e, data) {
 					// debugger; // dlh
-					data.context = $('<button/>').text('Upload')
-				.appendTo(document.body)
-				.click(function () {
-					// debugger; // dlh
-					var message = $('<p/>').text('Uploading...');
-					data.context = message;
-					$(this).replaceWith(message);
-					data.submit();
-				});
+					data.context = $('<button/>')
+						.text('Upload')
+						.appendTo(document.body)
+						.click(function () {
+							// debugger; // dlh
+							var message = $('<p/>').text('Uploading...');
+							data.context = message;
+							$(this).replaceWith(message);
+							data.submit();
+						});
 				},
 				done: function (e, data) {
 					// debugger; // dlh
-					data.context.text('Upload finished.');
+					data.context.text('Upload finished: ' + data.result.message);
 				},
 				fail: function (e, data) {
 					// debugger; // dlh
@@ -38,5 +37,10 @@
 			});
 		});
 	</script>
+</head>
+<body>
+	<form>
+	<input id="fileupload" type="file" name="files[]">
+	</form>
 </body>
 </html>
