@@ -1,41 +1,42 @@
 ﻿<!DOCTYPE HTML>
 <html>
 <head>
-<meta charset="utf-8">
-<title>jQuery File Upload Example</title>
+	<meta charset="utf-8">
+	<title>jQuery File Upload Example</title>
 </head>
 <body>
-<input id="fileupload" type="file" name="files[]" data-url="upload.ashx" multiple>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.js"></script>
-<script src="js/vendor/jquery.ui.widget.js"></script>
-<script src="js/jquery.iframe-transport.js"></script>
-<script src="js/jquery.fileupload.js"></script>
-<script>
-	$(function () {
-		$('#fileupload').fileupload({
-			dataType: 'json',
-			add: function (e, data) {
-				debugger; // dlh
-				data.context = $('<button/>').text('Upload')
+	<input id="fileupload" type="file" name="files[]">
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.js"></script>
+	<script src="js/vendor/jquery.ui.widget.js"></script>
+	<script src="js/jquery.iframe-transport.js"></script>
+	<script src="js/jquery.fileupload.js"></script>
+	<script>
+		$(function () {
+			$('#fileupload').fileupload({
+				dataType: 'json',
+				url: 'upload.ashx',
+				add: function (e, data) {
+					// debugger; // dlh
+					data.context = $('<button/>').text('Upload')
 				.appendTo(document.body)
 				.click(function () {
-					debugger; // dlh
+					// debugger; // dlh
 					var message = $('<p/>').text('Uploading...');
 					data.context = message;
 					$(this).replaceWith(message);
 					data.submit();
 				});
-			},
-			done: function (e, data) {
-				debugger; // dlh
-				data.context.text('Upload finished.');
-			},
-			fail: function (e, data) {
-				debugger; // dlh
-				data.context.text('Fail.');
-			}
+				},
+				done: function (e, data) {
+					// debugger; // dlh
+					data.context.text('Upload finished.');
+				},
+				fail: function (e, data) {
+					// debugger; // dlh
+					data.context.text('Fail.');
+				}
+			});
 		});
-	});
-</script>
-</body> 
+	</script>
+</body>
 </html>
